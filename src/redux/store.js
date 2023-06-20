@@ -1,5 +1,5 @@
 import { legacy_createStore as createStore } from "redux";
-import reducers from "./reducers/index";
+import reducers from "./reduces/index";
 // const stores = createStore (reducers);
 
 export const stores = createStore(
