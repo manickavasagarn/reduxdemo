@@ -6,7 +6,6 @@ import Product from "./Product";
 
 function Productlist() {
   const products = useSelector((state) => state.allProduct.products);
-  console.log("products : ", products);
   const dispatch = useDispatch();
 
   const fetchproduct = async () => {

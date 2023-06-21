@@ -22,3 +22,31 @@ export const SelectedProductReducer = (state = {}, action) => {
       return state;
   }
 };
+
+const initial_cart = {
+  products: [],
+};
+export const AddCart = (state = initial_cart, action) => {
+  switch (action.type) {
+    case ActionType.ADDTOCART:
+      var index = state.products.findIndex(
+        (obj) => obj.id == action.payload.id
+      );
+      if (index >= 0) {
+        return state;
+      } else {
+        return { products: [...state.products, action.payload] };
+      }
+    case ActionType.DELETETOCART:
+      var index1 = state.products.findIndex((obj) => obj.id == action.payload);
+      if (index1 < 0) {
+        return state;
+      } else {
+       // return { products: [...state.products, action.payload] };
+       state.products.splice(index1,1);
+       return state
+      }
+    default:
+      return state;
+  }
+};

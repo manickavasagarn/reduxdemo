@@ -1,15 +1,16 @@
 import axios from "axios";
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import {
+  addtocart,
   removeselectProduct,
   selectProduct,
 } from "../redux/action/productAction";
 
 function ProductDetail() {
   const products = useSelector((state) => state.seleted);
-  console.log(products);
+  const [msg, setmsg] = useState(false);
   const id = useParams().id;
   const dispatch = useDispatch();
   const fetchseleted = async () => {
@@ -22,13 +23,15 @@ function ProductDetail() {
   };
 
   useEffect(() => {
-    console.log("testrjking");
     fetchseleted();
     return () => {
       dispatch(removeselectProduct());
     };
   }, []);
-
+  const handleaddtocart = (product) => {
+    dispatch(addtocart(product));
+    setmsg(true);
+  };
   return (
     <>
       <div className="container">
@@ -50,10 +53,23 @@ function ProductDetail() {
                   <p class="card-text">Description : {products.description} </p>
 
                   <div className="text-center">
-                    <button className="btn btn-primary">
+                    <button
+                      onClick={() => handleaddtocart(products)}
+                      className="btn btn-primary"
+                    >
                       Buy ${products.price}
                     </button>
                   </div>
+                  <br></br>
+                  {msg ? (
+                    <div
+                      class="alert alert-warning alert-dismissible fade show"
+                      role="alert"
+                    >
+                      <strong>Your Product</strong> is Successfully added to
+                      Cart, Please Check it !
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>

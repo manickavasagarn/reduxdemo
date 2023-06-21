@@ -18,3 +18,18 @@ export const removeselectProduct = () => {
     type: ActionType.REMOVE_SELECT_PRODUCT
   };
 };
+
+export const addtocart=(product)=>{
+  return {
+    type:ActionType.ADDTOCART,
+    payload:product
+  }
+}
+
+export const deletetocart=(product)=>{
+  return {
+    type:ActionType.DELETETOCART,
+    payload:product
+  }
+}
+
